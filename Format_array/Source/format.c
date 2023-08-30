@@ -69,7 +69,7 @@ char* findSubString(char* sampleString, char* sampleSentence){
     uint8_t find_flag = 0;
     char* location = sampleString;
     while (*sampleString != '\0'){
-        if(*sampleString == sampleSentence[checkCount] || *sampleString == (sampleSentence[checkCount] - 32)){
+        if(*sampleString == sampleSentence[checkCount] || *sampleString == (sampleSentence[checkCount] - 32) || *sampleString == (sampleSentence[checkCount] + 32){
             checkCount++;
             if(checkCount == lenghtOfString(sampleSentence)){
                 find_flag = 1;
