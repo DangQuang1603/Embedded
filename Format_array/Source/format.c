@@ -49,7 +49,7 @@ Output: none
 */
 void copStr (char* string, char* copString){
     uint8_t checkLenght = 0;
-    while (checkLenght <= lenghtOfString(copString)){
+    while (checkLenght <= (lenghtOfString(copString)+1)){
         *string = *copString;
         string++;
         copString++;
@@ -69,7 +69,7 @@ char* findSubString(char* sampleString, char* sampleSentence){
     uint8_t find_flag = 0;
     char* location = sampleString;
     while (*sampleString != '\0'){
-        if(*sampleString == sampleSentence[checkCount]){
+        if(*sampleString == sampleSentence[checkCount] || *sampleString == (sampleSentence[checkCount] - 32) || *sampleString == (sampleSentence[checkCount] + 32){
             checkCount++;
             if(checkCount == lenghtOfString(sampleSentence)){
                 find_flag = 1;
