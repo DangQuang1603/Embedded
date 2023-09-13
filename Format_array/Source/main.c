@@ -1,15 +1,17 @@
 #include<stdio.h>
-#include"Format.h"
-#include"Format.c"
-
-char sampleString[] = "to help people around the world learn about anything. today we learn about that";
+#include"format.h"
 
 int main(int argc, char const *argv[])
 {
-    captureString(sampleString);
+    char sampleString[] = "remember that people like you keep the world turning, so you should keep moving";
+    // captureString(sampleString);
+    // displayString(sampleString);
+    // findSentence(sampleString, "help");
+    // replaceSentence(sampleString, "hi", "hello");
+    insert(sampleString, "hi", "hello");
     displayString(sampleString);
-    findSentence(sampleString, "help");
-    replaceSentence(sampleString, "anything", "abcd");
+    insert(sampleString, "you", "me");
     displayString(sampleString);
+    
     return 0;
 }

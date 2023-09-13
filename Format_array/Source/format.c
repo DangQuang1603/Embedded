@@ -8,7 +8,7 @@
 #include<stdint.h>
 #include<stdbool.h>
 #include<stdlib.h>
-#include"Format.h"
+#include"format.h"
 
 
 
@@ -69,7 +69,7 @@ char* findSubString(char* sampleString, char* sampleSentence){
     uint8_t find_flag = 0;
     char* location = sampleString;
     while (*sampleString != '\0'){
-        if(*sampleString == sampleSentence[checkCount] || *sampleString == (sampleSentence[checkCount] - 32) || *sampleString == (sampleSentence[checkCount] + 32){
+        if(*sampleString == sampleSentence[checkCount] || *sampleString == (sampleSentence[checkCount] - 32) || *sampleString == (sampleSentence[checkCount] + 32)){
             checkCount++;
             if(checkCount == lenghtOfString(sampleSentence)){
                 find_flag = 1;
@@ -119,7 +119,7 @@ Description: find substring in mainstring, if exist print Yes and return the sta
 Input: A address of mainstring and sbustring
 Output: none
 */
-void findSentence (char* sampleString, char* sampleSentence){
+uint8_t findSentence (char* sampleString, char* sampleSentence){
     uint8_t checkCount = 0;
     uint8_t find_flag = 0;
     for (uint8_t i = 0; i < lenghtOfString(sampleString); i++){
@@ -139,9 +139,8 @@ void findSentence (char* sampleString, char* sampleSentence){
     }else{
         printf("Can't find sample sentence in string!\n");
     }
-
+    return checkCount;
 }
-
 
 /*
 Function: replaceSentence
@@ -171,4 +170,47 @@ void replaceSentence (char* string, char* sampleSentence, char* sentenceRepalce)
         string[i] = result[i];
     }
     string[i] = '\0';
+}
+
+void insert (char* string, char* sampleSentence, char* sentenceRepalce){
+
+    for (uint8_t i =  0; string[i] != '\0';i++){
+        uint8_t lenstring = lenghtOfString(string);
+        uint8_t lensample = lenghtOfString(sampleSentence);
+        uint8_t lenreplace = lenghtOfString(sentenceRepalce);
+        uint8_t locationUpdate = lenstring - lensample + lenreplace;
+        if (findSubString(&string[i], sampleSentence) == &string[i]){
+            uint8_t j = 0;
+            uint8_t locationFirst = i;
+            uint8_t locationFinal = locationFirst + lensample;
+            if (locationUpdate > lenstring){
+                string[locationUpdate] = '\0';
+                while (lenstring >= locationFinal)
+                {
+                    string[--locationUpdate] = string[--lenstring];
+                }
+
+                while(sentenceRepalce[j] != '\0'){
+                    string[locationFirst] = sentenceRepalce[j];
+                    locationFirst++;
+                    j++;
+                }
+            }else if(locationUpdate < lenstring){
+
+                while(sentenceRepalce[j] != '\0'){
+                    string[locationFirst] = sentenceRepalce[j];
+                    locationFirst++;
+                    j++;
+                }
+
+                while (string[locationFinal] != '\0')
+                {
+                    string[locationFirst] = string[locationFinal];
+                    locationFirst++;
+                    locationFinal++;
+                }
+                string[locationUpdate] = '\0';
+            }
+        }   
+    }
 }
