@@ -1,0 +1,63 @@
+/*
+    1. Add student
+    2. Update student information wiht id.
+    3. Delete student information with id.
+    4. Find specifier student with name (print all information of this student).
+    5. Soft student with average score.
+    6. Soft student with name.
+    7. Show list of student.
+*/
+
+#include "student_database.h"
+int main(int argc, char const *argv[])
+{
+    list<sinhVien> studentDatabase;
+    int key;
+    do{
+        cout << "Main menu:\n"
+             << "1. Add student.\n"
+             << "2. Update student information wiht id.\n"
+             << "3. Delete student information with id.\n"
+             << "4. Find specifier student with name (print all information of this student).\n"
+             << "5. Soft student with average score.\n"
+             << "6. Soft student with name.\n"
+             << "7. Show list of student.\n"
+             << "Enter choice:";
+        cin >> key;
+        cout << endl;
+        if (key > 1 && key > 7){
+            system("cls");
+            cout << "Enter choice again!" << endl;
+        } 
+
+    }while (key < 1 || key > 7);
+    
+    switch (key)
+    {
+    case ADD:
+        addStudent(studentDatabase);
+        break;
+    case UPDATE:
+        updateInformation(studentDatabase);
+        break;
+    case DELETE:
+        deleteStudent(studentDatabase);
+        break;
+    case FIND:
+        findStudent(studentDatabase);
+        break;
+    case SOFT_AVERAGE_SCORE:
+        // softByAverageScore(studentDatabase);
+        break;
+    case SOFT_NAME:
+        // softByAverageScore(studentDatabase);
+        break;
+    case SHOW_STUDENT:
+        showAllStudent(studentDatabase);
+        break;
+    default:
+        break;
+    }
+
+    return 0;
+}
