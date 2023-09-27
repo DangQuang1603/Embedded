@@ -26,7 +26,6 @@ int main(int argc, char const *argv[])
         cin >> key;
         cout << endl;
         if (key > 1 && key > 7){
-            system("cls");
             cout << "Enter choice again!" << endl;
         } 
 
@@ -35,24 +34,31 @@ int main(int argc, char const *argv[])
     switch (key)
     {
     case ADD:
+        system("cls");
         addStudent(studentDatabase);
         break;
     case UPDATE:
+        system("cls");
         updateInformation(studentDatabase);
         break;
     case DELETE:
+        system("cls");
         deleteStudent(studentDatabase);
         break;
     case FIND:
+        system("cls");
         findStudent(studentDatabase);
         break;
     case SOFT_AVERAGE_SCORE:
-        // softByAverageScore(studentDatabase);
+        system("cls");
+        studentDatabase.sort(compareAverageScore);
         break;
     case SOFT_NAME:
-        // softByAverageScore(studentDatabase);
+        system("cls");
+        studentDatabase.sort(compareName);
         break;
     case SHOW_STUDENT:
+        system("cls");
         showAllStudent(studentDatabase);
         break;
     default:

@@ -1,5 +1,21 @@
 #include "student_database.h"
 
+sinhVien::sinhVien(string name, int age, gender genDer, int mathScore, int physicScore, int chemistryScore)
+{
+    static int index = 1;
+    ID = index;
+    index++;
+
+    NAME = name;
+    AGE = age;
+    GENDER = genDer;
+    MATHSCORE = mathScore;
+    PHYSICSORE = physicScore;
+    CHEMISTRYSCORE = chemistryScore;
+    AVERAGESCORE = (MATHSCORE+PHYSICSORE+CHEMISTRYSCORE)/3;
+}
+
+
 void addStudent (list<sinhVien>& studentDatabase){
     string name;
     int age;
@@ -223,5 +239,13 @@ void showAllStudent(list<sinhVien> studentDatabase){
         cout << "  " << Quantity << "      " << marklist ->getName() << endl;
         Quantity++;
     }
+}
+
+bool compareName (sinhVien sv1, sinhVien sv2){
+    return sv1.getName() < sv2.getName();
+}
+
+bool compareAverageScore (sinhVien sv1, sinhVien sv2){
+    return sv1.getAveragescore() < sv2.getAveragescore();
 }
 

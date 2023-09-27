@@ -32,6 +32,7 @@ private:
     int MATHSCORE;
     int PHYSICSORE;
     int CHEMISTRYSCORE;
+    int AVERAGESCORE;
 public:
     sinhVien(string name, int age, gender genDer, int mathScore, int physicScore, int chemistryScore);
 
@@ -42,7 +43,7 @@ public:
     int getMathscore() {return MATHSCORE;}
     int getPhysicscore() {return PHYSICSORE;}
     int getChemistryscore() {return CHEMISTRYSCORE;}
-    int getAveragescore() {return (MATHSCORE + PHYSICSORE + CHEMISTRYSCORE)/3;}
+    int getAveragescore() {return AVERAGESCORE;}
 
     void updateName(string updateName){NAME =  updateName;}
     void updateAge(int updateAge){AGE =  updateAge;}
@@ -52,20 +53,6 @@ public:
     void updateChemistryscore(int updateChemistryScore){CHEMISTRYSCORE =  updateChemistryScore;}
 };
 
-sinhVien::sinhVien(string name, int age, gender genDer, int mathScore, int physicScore, int chemistryScore)
-{
-    static int index = 1;
-    ID = index;
-    index++;
-
-    NAME = name;
-    AGE = age;
-    GENDER = genDer;
-    MATHSCORE = mathScore;
-    PHYSICSORE = physicScore;
-    CHEMISTRYSCORE = chemistryScore;
-}
-
 void addStudent (list<sinhVien>& database);
 void updateInformation (list<sinhVien>& database);
 void deleteStudent (list<sinhVien>& database);
@@ -73,6 +60,8 @@ void findStudent (list<sinhVien> database);
 void softByAverageScore (list<sinhVien>& database);
 void softByName (list<sinhVien>& database);
 void showAllStudent (list<sinhVien> database);
+bool compareName (sinhVien sv1, sinhVien sv2);
+bool compareAverageScore (sinhVien sv1, sinhVien sv2);
 
 
 
