@@ -26,6 +26,7 @@ int main(int argc, char const *argv[])
         cin >> key;
         cout << endl;
         if (key > 1 && key > 7){
+            system("cls");
             cout << "Enter choice again!" << endl;
         } 
 
