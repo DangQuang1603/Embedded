@@ -65,3 +65,27 @@ All of my knowledge and practice in this course is here
 - There are some unkown statements in the object file that operate system can't understand. You can understand you read a book have some word you don't know and you'll use dictionary to find the meaning of those word. Similarly, we you library files to give meaning to unknown statements in out object files.
 </details>
 
+<details>
+    <summary>Macro</summary>
+
+### Macro là gì?
+- Macro là một đoạn mã trong chương trình, sẽ được thay thế bằng giá trị của macro trong quá trình tiền xử lý. Macro được định nghĩa bởi cấu trúc #define và không cần kết thúc bằng dấu ";".
+- Dưới đây là một đoạn mã ví dụ dùng macro trong C/C++:
+  ```c
+  // C program to illustrate macros
+  #include <stdio.h>
+  
+  // Macro definition
+  #define LIMIT 5
+  
+  // Driver Code
+  int main()
+  {
+  	// Print the value of macro defined
+  	printf("The value of LIMITis %d",LIMIT);
+  	return 0;
+  }
+  ```c
+  
+>Output: The value of LIMIT is 5
+</details>
