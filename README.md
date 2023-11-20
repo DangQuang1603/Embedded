@@ -65,3 +65,35 @@ All of my knowledge and practice in this course is here
 - There are some unkown statements in the object file that operate system can't understand. You can understand you read a book have some word you don't know and you'll use dictionary to find the meaning of those word. Similarly, we you library files to give meaning to unknown statements in out object files.
 </details>
 
+<details>
+  <summary>Macro</summary>
+
+## Một số macro
+
+### Macro hàm
+```
+  void test()
+  {
+      printf("Hello world");
+  }
+  #define TEST test()
+```
+### Macro có tham số truyền vào
+```
+  #define TONG(a,b) a+b
+```
+### Macro hàm có tham số truyền vào
+```
+  #define INPUT_DISPLAY(var,cmd,cond) \
+    int var;                          \
+    do                                \
+    {                                 \
+      printf(cmd);                    \
+      scanf(%d, &var);                \
+    } while(cond)                     \
+    printf(#var);                     \
+    printf("= %d\n", var);
+```
+
+
+</details>
