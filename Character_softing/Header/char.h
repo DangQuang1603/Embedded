@@ -10,6 +10,8 @@ uint8_t sizeOfArray = 0;
 
 typedef struct {
     uint8_t lenght;
+    bool status;
+    uint8_t frequency;
     char* parray;
 } Word;
 

@@ -67,6 +67,27 @@ All of my knowledge and practice in this course is here
 
 <details>
   <summary>Macro</summary>
+  
+### Macro là gì?
+- Macro là một đoạn mã trong chương trình, sẽ được thay thế bằng giá trị của macro trong quá trình tiền xử lý. Macro được định nghĩa bởi cấu trúc #define và không cần kết thúc bằng dấu ";".
+- Dưới đây là một đoạn mã ví dụ dùng macro trong C/C++:
+  ```c
+  // C program to illustrate macros
+  #include <stdio.h>
+  
+  // Macro definition
+  #define LIMIT 5
+  
+  // Driver Code
+  int main()
+  {
+  	// Print the value of macro defined
+  	printf("The value of LIMITis %d",LIMIT);
+  	return 0;
+  }
+  ```c
+  
+>Output: The value of LIMIT is 5
 
 ## Một số macro
 
@@ -94,6 +115,4 @@ All of my knowledge and practice in this course is here
     printf(#var);                     \
     printf("= %d\n", var);
 ```
-
-
 </details>

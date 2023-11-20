@@ -11,7 +11,6 @@ split array and check frequency of element in array
 Word* splitArray (char* sampleArraySplit){
 
     char* countArray = sampleArraySplit;
-    Word *arraySplit = (Word*) malloc (sizeof(Word)*sizeOfArray);
     uint8_t sizeOfSplit = 0;
     uint8_t index = 0;
     uint8_t i = 0;
@@ -24,6 +23,7 @@ Word* splitArray (char* sampleArraySplit){
     }
     sizeOfArray++;
     
+    Word *arraySplit = (Word*) malloc (sizeof(Word)*sizeOfArray);
     arraySplit[index].parray = sampleArraySplit;
     while (sampleArraySplit[i] != '\0'){
        if(sampleArraySplit[i] == ' '){
