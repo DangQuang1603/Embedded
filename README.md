@@ -232,3 +232,247 @@ Trong C và C++, volatile là một từ khóa được sử dụng để thông
 ```
 Trong ví dụ này, biến sensorValue được khai báo với từ khóa volatile. Điều này có ý nghĩa rằng trình biên dịch không nên tối ưu hóa, cache, hoặc thực hiện bất kỳ biện pháp tối ưu hóa nào khác liên quan đến việc truy cập hoặc sử dụng biến này. Thông thường, biến volatile được sử dụng khi biến có thể thay đổi không đồng bộ, chẳng hạn trong các ứng dụng liên quan đến đọc/ghi từ/xuất các thanh ghi của phần cứng, đọc dữ liệu từ các cổng vào/ra, hoặc trong việc xử lý ngắt.
 </details>
+
+<details>
+  <summary>Struct and union</summary>
+
+###Struct
+#####Syntax
+```
+    Struct struture name{
+      datatype member_name1;
+      datatype member_name2;
+      ....
+      ....
+    }
+```
+
+#####C Structure Definition
+With struct template
+```
+    struct struture name{
+      datatype member_name1;
+      datatype member_name2;
+      ....
+      ....
+    } variable1, variable2,...;
+```
+After struct template
+```
+    struct struct_name variable1, variable2,...;
+```
+
+#####Access Structure Members
+We can access structure members by using the ( . ) dot operator.
+>variable1.member1;
+
+#####Initialize Structure Members
+Structure members cannot be initialized with the declaration.
+The reason for the above error is simple. When a datatype is declared, no memory is allocated for it. Memory is allocated only when variables are created.
+We can initialize structure members in 3 ways which are as follows:
+1.	Using Assignment Operator.
+```
+    struct struct_name str;
+    str.member1 = 10;
+    str.member2 = 20;
+    str.member3 = 30;
+    .
+    .
+```
+2.	Using Initializer List.
+```
+      struct struct_name str = {10,20,30};
+```
+3.	Using Designated Initializer List.
+```
+    struct struct_name str = {.member1 = 10, .member2 = 20, .member3 = 30};
+```
+
+#####Typedef for Structures
+We can use the typedef to define some new shorter name for the structure.
+```
+
+typedef struct{
+  datatype member1;
+  datatype member2;
+} struct name;
+```
+
+#####Nested Structures
+Embedded Structure Nesting
+```
+    struct struct_name{
+      int member1;
+      struct str member2{
+        int str_member1;
+        char str_member2;
+        ...
+      };
+      ...
+    }
+```
+Separate Structure Nesting
+```
+    struct struct_name1{
+      int str_member1;
+      char str_member2;
+      ...
+    };
+
+    struct struct_name2{
+      double member1;
+      struct struct_name1 member2;
+      ...
+    };
+```
+Accessing Nested Members
+```
+  struct_name2.struct_name1.str_member1;
+```
+
+#####Structure Pointer in C
+We can define a pointer that points to the structure like any other variable. Such pointers are generally called Structure Pointers. We can access the members of the structure pointed by the structure pointer using the ( -> ) arrow operator.
+```
+      / C program to illustrate the structure pointer 
+      #include <stdio.h> 
+  
+      // structure declaration 
+      struct Point { 
+          int x, y; 
+      }; 
+        
+      int main() 
+      { 
+          struct Point str = { 1, 2 }; 
+        
+          // p2 is a pointer to structure p1 
+          struct Point* ptr = &str; 
+        
+          // Accessing structure members using structure pointer 
+          printf("%d %d", ptr->x, ptr->y); 
+        
+          return 0; 
+      }
+```
+
+#####Self-Referential Structures
+The self-referential structures in C are those structures that contain references to the same type as themselves i.e. they contain a member of the type pointer pointing to the same structure type.
+```
+    // C program to illustrate the self referential structures 
+    #include <stdio.h> 
+
+    // structure template 
+    typedef struct str { 
+      int mem1; 
+      int mem2; 
+      struct str* next; 
+    }str; 
+
+    // driver code 
+    int main() 
+    { 
+      str var1 = { 1, 2, NULL }; 
+      str var2 = { 10, 20, NULL }; 
+
+      // assigning the address of var2 to var1.next 
+      var1.next = &var2; 
+
+      // pointer to var1 
+      str *ptr1 = &var1; 
+
+      // accessing var2 members using var1 
+      printf("var2.mem1: %d\nvar2.mem2: %d", ptr1->next->mem1, 
+        ptr1->next->mem2); 
+
+      return 0; 
+    }
+```
+
+#####C Structure Padding and Packing
+Structure padding is the concept of adding multiple empty bytes in the structure to naturally align the data members in the memory. It is done to minimize the CPU read cycles to retrieve different data members in the structure.
+There are some situations where we need to pack the structure tightly by removing the empty bytes. In such cases, we use Structure Packing. C language provides two ways for structure packing:
+1.	Using #pragma pack(1)
+2.	Using __attribute((packed))__
+```
+    // C program to illustrate structure padding and packing 
+    #include <stdio.h> 
+
+    // structure with padding 
+    struct str1 { 
+      char c; 
+      int i; 
+    }; 
+
+    struct str2 { 
+      char c; 
+      int i; 
+    } __attribute((packed)) __; // using structure packing 
+
+    // driver code 
+    int main() 
+    { 
+      printf("Size of str1: %d\n", sizeof(struct str1)); 
+      printf("Size of str2: %d\n", sizeof(struct str2)); 
+      return 0; 
+    }
+```
+
+Output
+>Size of str1: 8
+>Size of str1: 5
+
+#####Bit Fields
+Bit Fields are used to specify the length of the structure members in bits. When we know the maximum length of the member, we can use bit fields to specify the size and reduce memory consumption.
+
+Syntax
+```
+      struct structure_name {
+        data_type member_name: width_of_bit-field;
+      };
+```
+
+```
+    // C Program to illustrate bit fields in structures 
+    #include <stdio.h> 
+
+    // declaring structure for reference 
+    struct str1 { 
+      int a; 
+      char c; 
+    }; 
+
+    // structure with bit fields 
+    struct str2 { 
+      int a : 24; // size of 'a' is 3 bytes = 24 bits 
+      char c; 
+    }; 
+
+    // driver code 
+    int main() 
+    { 
+      printf("Size of Str1: %d\nSize of Str2: %d", 
+        sizeof(struct str1), sizeof(struct str2)); 
+      return 0; 
+    }
+```
+
+Ouput
+>Size of Str1: 8
+Size of Str2: 4
+
+#####Uses of Structure in C
+C structures are used for the following:
+1.	The structure can be used to define the custom data types that can be used to create some complex data types such as dates, time, complex numbers, etc. which are not present in the language.
+2.	It can also be used in data organization where a large amount of data can be stored in different fields.
+3.	Structures are used to create data structures such as trees, linked lists, etc.
+4.	They can also be used for returning multiple values from a function
+
+#####Limitations of C Structures
+In C language, structures provide a method for packing together data of different types. A Structure is a helpful tool to handle a group of logically related data items. However, C structures also have some limitations.
+
+Higher Memory Consumption: It is due to structure padding.
+No Data Hiding: C Structures do not permit data hiding. Structure members can be accessed by any function, anywhere in the scope of the structure.
+Functions inside Structure: C structures do not permit functions inside the structure so we cannot provide the associated functions.
+Static Members: C Structure cannot have static members inside its body.
+Construction creation in Structure: Structures in C cannot have a constructor inside Structures.
+</details>
