@@ -63,6 +63,12 @@ All of my knowledge and practice in this course is here
 - Linking is a process of including the library file into our program, more details, we have an object file having machine-lever code, its passed through the linker which links the library files with the object file to generat an executable file with an extension of .exe in DOS and .out in UNIX OS.
 - Library file are some predefine files that contain difines of the function in the machine language with the extension of .lib.
 - There are some unkown statements in the object file that operate system can't understand. You can understand you read a book have some word you don't know and you'll use dictionary to find the meaning of those word. Similarly, we you library files to give meaning to unknown statements in out object files.
+
+### Command
+>gcc E main.c -o main.i
+>gcc main.i -S -o main.s
+>gcc -c main.s -o main.o
+>gcc main.o -o main
 </details>
 
 <details>
@@ -475,4 +481,141 @@ No Data Hiding: C Structures do not permit data hiding. Structure members can be
 Functions inside Structure: C structures do not permit functions inside the structure so we cannot provide the associated functions.
 Static Members: C Structure cannot have static members inside its body.
 Construction creation in Structure: Structures in C cannot have a constructor inside Structures.
+
+###Union
+The Union is a user-defined data type in C language that can contain elements of the different data types just like structure. But unlike structures, all the members in the C union are stored in the same memory location. Due to this, only one member can store data at the given instance.
+#####Syntax
+The syntax of the union in C can be divided into three steps which are as follows:
+######C Union Declaration
+we only declare the members’ names and data types along with the name of the union. No memory is allocated to the union in the declaration.
+```
+    union union_name {
+        datatype member1;
+        datatype member2;
+        ...
+    };
+```
+######Define a Union Variable
+We need to define a variable of the union type to start using union members. There are two methods using which we can define a union variable.
+
+1. With Union Declaration (simalar with struct)
+2. After Union Declaration (simalar with struct)
+######Access Union Members
+Similar with struct
+#####Size of Union
+The size of the union will always be equal to the size of the largest member of the array.
+
+#####What are the applications of unions?
+Unions can be useful in many situations where we want to use the same memory for two or more members. For example, suppose we want to implement a binary tree data structure where each leaf node has a double data value, while each internal node has pointers to two children, but no data. If we declare this as: 
+```
+    struct NODE {
+      struct NODE* left;
+      struct NODE* right;
+      double data;
+    };
+```
+then every node requires 16 bytes, with half the bytes wasted for each type of node. On the other hand, if we declare a node as the following, then we can save space. 
+```
+    struct NODE {
+        bool is_leaf;
+        union {
+            struct {
+                struct NODE* left;
+                struct NODE* right;
+            } internal;
+            double data;
+        } info;
+    };
+```
+
+###Difference between C Structure and C Union
+
+|Struct|Union|
+|:--:|:--:|
+|The size of the structure is equal to or greater than the total size of all of its members.|The size of the union is the size of its largest member.|
+|The structure can contain data in multiple members at the same time.|Only one member can contain data at the same time.|
+|It is declared using the struct keyword.|It is declared using the union keyword.|
+</details>
+
+<details>
+  <summary>File handling in C</summary>
+
+###C File Operations
+C file operations refer to the different possible operations that we can perform on a file in C such as:
+Creating a new file – **fopen() with attributes as “a” or “a+” or “w” or “w+”**
+Opening an existing file – **fopen()**
+Reading from file – **fscanf() or fgets()**
+Writing to a file – **fprintf() or fputs()**
+Moving to a specific location in a file – **fseek(), rewind()**
+Closing a file – **fclose()**
+
+###File Pointer in C
+#####Syntax of File Pointer
+FILE* pointer_name;
+
+###Open a File in C
+#####Syntax of fopen()
+```
+    FILE* fopen(const char *file_name, const char *access_mode);
+```
+#####Parameters
+file_name: name of the file when present in the same directory as the source file. Otherwise, full path.
+access_mode: Specifies for what operation the file is being opened.
+#####Return Value
+1. If the file is opened successfully, returns a file pointer to it.
+2. If the file is not opened, then returns NULL.
+#####File opening modes in C
+|Opening mode|Descripsion|
+|:--:|:--:|
+|r|Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer that points to the first character in it. If the file cannot be opened fopen( ) returns NULL.|
+|rb|Open for reading in binary mode. If the file does not exist, fopen( ) returns NULL.|
+|w|Open for writing in text mode. If the file exists, its contents are overwritten. If the file doesn’t exist, a new file is created. Returns NULL, if unable to open the file.|
+|wb|Open for writing in binary mode. If the file exists, its contents are overwritten. If the file does not exist, it will be created.|
+|a|Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer that points to the last character in it. It opens only in the append mode. If the file doesn’t exist, a new file is created. Returns NULL, if unable to open the file.|
+|ab|Open for append in binary mode. Data is added to the end of the file. If the file does not exist, it will be created.|
+|r+|Searches file. It is opened successfully fopen( ) loads it into memory and sets up a pointer that points to the first character in it. Returns NULL, if unable to open the file.|
+|rb+|Open for both reading and writing in binary mode. If the file does not exist, fopen( ) returns NULL.|
+|w+|Searches file. If the file exists, its contents are overwritten. If the file doesn’t exist a new file is created. Returns NULL, if unable to open the file.|
+|wb+|Open for both reading and writing in binary mode. If the file exists, its contents are overwritten. If the file does not exist, it will be created.|
+|a+|Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer that points to the last character in it. It opens the file in both reading and append mode. If the file doesn’t exist, a new file is created. Returns NULL, if unable to open the file.|
+|ab+|Open for both reading and appending in binary mode. If the file does not exist, it will be created.|
+
+#####Example of Opening a File
+```
+    // C Program to illustrate file opening
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main()
+    {
+      // file pointer variable to store the value returned by
+      // fopen
+      FILE* fptr;
+
+      // opening the file in read mode
+      fptr = fopen("filename.txt", "r");
+
+      // checking if the file is opened successfully
+      if (fptr == NULL) {
+        printf("The file is not opened. The program will "
+          "now exit.");
+        exit(0);
+      }
+
+      return 0;
+    }
+
+```
+
+###Reading From a File
+The file read operation in C can be performed using functions fscanf() or fgets(). Both the functions performed the same operations as that of scanf and gets but with an additional parameter, the file pointer. There are also other functions we can use to read from a file. Such functions are listed below:
+
+|Function|Description|
+|:--:|:--:|
+|fscanf()|Use formatted string and variable arguments list to take input from a file.|
+|fgets()|Input the whole line from the file.|
+|fgetc()|Reads a single character from the file.|
+|fgetw()|Reads a number from a file.|
+|fread()|Reads the specified bytes of data from a binary file.|
+
 </details>
